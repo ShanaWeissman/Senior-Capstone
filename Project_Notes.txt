@@ -1,0 +1,22 @@
+1/21/18
+I am working on the very beginnings, how I will input a database to be processed. 
+Since my databases only require timestamps, I will feed the simulation a CSV of data for which
+it will filter out the timestamp values and store them into a postgresql database with a given name. 
+The two arguments that Sim_TSDB takes as of right now are a database name and a csv file. 
+
+Data Set 1 --> https://www.kaggle.com/BGU-CSRC/sherlock/version/1
+I will only be using the csv called AllBroadcasts.csv
+
+Data Set 2 -->  https://www.kaggle.com/jeanmidev/smart-meters-in-london#weather_hourly_darksky.csv
+I will only be using the CSV called 
+
+Data Set 3 --> https://www.reddit.com/r/datasets/comments/hwpu0/any_interest_in_a_data_dump_of_all_e3related_news/
+I will only be using the csv called e3feed_search_export.csv these time stamps are in epoch time stamps
+
+2/5/18
+I have ingested the ALl broadcast data set. This took a bit more time than expected because I had to do some cleaning.
+I wrote a function all_broadcast_ingest_data that ingests it. Now that I have timestamps in the data base, I can start with the 
+Inverted index module. 
+
+2/7/19
+Working on Inverted Index, 
