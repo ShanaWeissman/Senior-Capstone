@@ -1,4 +1,4 @@
-1/21/18
+1/21/19
 I am working on the very beginnings, how I will input a database to be processed. 
 Since my databases only require timestamps, I will feed the simulation a CSV of data for which
 it will filter out the timestamp values and store them into a postgresql database with a given name. 
@@ -13,10 +13,24 @@ I will only be using the CSV called
 Data Set 3 --> https://www.reddit.com/r/datasets/comments/hwpu0/any_interest_in_a_data_dump_of_all_e3related_news/
 I will only be using the csv called e3feed_search_export.csv these time stamps are in epoch time stamps
 
-2/5/18
-I have ingested the ALl broadcast data set. This took a bit more time than expected because I had to do some cleaning.
-I wrote a function all_broadcast_ingest_data that ingests it. Now that I have timestamps in the data base, I can start with the 
-Inverted index module. 
+2/5/19
+I have ingested the ALl broadcast data set. This took a bit more time than expected because I had to do some cleaning. I wrote a function all_broadcast_ingest_data that ingests it. Now that I have timestamps in the data base, I can start with the Inverted index module. The other 2 datasets are also cleaned and are successfully ingested
 
 2/7/19
-Working on Inverted Index, 
+Working on Inverted Index. Most of the time for inverted index, there's a lot of tokenism and normalisation to be done in a text data context, since this is a time stamp context, this can be skipped. Normally a boolean search is done (and, or) because usually a specific word or words are being queried for. However, the actual search algorithm isn't specified. Therefore I will be using binary search seeing as the lexicon will be previously sorted. Each item in the lexicon typically has an inverted list containing what documents it is in, however, since this is just a simulation of the index and the time stamps aren't pointing to any actual data, I will forgo that portion of the index for now, and it will just be an array. 
+
+2/8/19
+The unbounded query is a difficult one to code because of the multiple options of unbounded queries:
+	1) Not between points a and b
+	2) Greater than point a
+	3) Less than point a
+In this case I am just going to assume that the user knows the exact bounds of the time series data set and write a function that takes 2 parameters for a query of all pounds outside of that range. (If you know the bounds you can technically do the equivalent of greater than or less than. 
+
+2/18/19
+The timestamp format differs from each csv. 
+All Broadcast format: "%Y-%m-%d %H:%M:%S.%f" database name: AB call: python Sim_TSDB.py AllBroadcasts.csv AB timestamp %Y-%m-%d,%H:%M:%S.%f
+wheather hourly dark sky: "%Y-%m-%d %H:%M:%S" database name: WHD call: python Sim_TSDB.py data_sets/weather_hourly_darksky.csv WHD time %Y-%m-%d,%H:%M:%S
+e3feed search export: "epoch" database name: FSE call: python Sim_TSDB.py data_sets/e3feed_search_export.csv FSE time epoch
+
+Also, to drop a database from the command line use the command dropdb database_name
+3/3/19
